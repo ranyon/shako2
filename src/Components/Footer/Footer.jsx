@@ -17,7 +17,7 @@ const Footer = () => {
               </Link>
             </div>
             <p className="text-white mb-4" style={{ fontSize: '0.95rem', lineHeight: '1.6', maxWidth: '300px' }}>
-              Experience the authentic taste of Iraqi tradition carefully crafted with premium ingredients and passion.
+              Experience the authentic taste of tradition carefully crafted with premium ingredients and passion at Shako Mako.
             </p>
             <div className="d-flex gap-3">
               <a href="#" className="text-white hover-white transition"><Instagram size={20} /></a>

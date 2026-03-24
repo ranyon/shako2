@@ -335,7 +335,7 @@ ${orderData.cart.map(item => `- ${item.name} x${item.quantity} (GHS ${item.price
           )}
           
           <Alert variant="info" className="mb-4">
-            Please send GHS {getTotalPrice()} to our MoMo number: {BUSINESS_MOMO} (360 Taste) before confirming order
+            Please send GHS {getTotalPrice()} to our MoMo number: {BUSINESS_MOMO} (Shako Mako) before confirming order
           </Alert>
 
           <Form onSubmit={handlePayment}>

@@ -267,7 +267,7 @@ const Menu = () => {
             animate={{ opacity: 1, y: 0 }}
             style={{ fontSize: '3.5rem', fontWeight: 800 }}
           >
-            The <span style={{ color: 'var(--accent-primary)' }}>Menu</span>.
+            The <span style={{ color: 'var(--accent-primary)' }}>Signatures</span>.
           </motion.h1>
           <motion.p
             initial={{ opacity: 0 }}
@@ -275,47 +275,9 @@ const Menu = () => {
             transition={{ delay: 0.2 }}
             style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}
           >
-            Filter by category or explore all our mouth-watering offerings.
+            Experience our exclusive house specialty dishes.
           </motion.p>
         </div>
-
-        {/* Visual Filter Strip */}
-        <FilterSection>
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <FilterStrip>
-              <FilterCard
-                $isActive={activeCategory === 'All'}
-                onClick={() => setActiveCategory('All')}
-              >
-                <div className="cat-img-wrapper">
-                  <ListFilter size={24} />
-                </div>
-                <h3 className="cat-title">Explore All</h3>
-              </FilterCard>
-
-              {categories.map(category => (
-                <FilterCard
-                  key={category.id}
-                  $isActive={activeCategory === category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                >
-                  <div className="cat-img-wrapper">
-                    <img
-                      src={getCategoryImage(category.id)}
-                      alt={category.name}
-                      className="cat-img"
-                    />
-                  </div>
-                  <h3 className="cat-title">{category.name}</h3>
-                </FilterCard>
-              ))}
-            </FilterStrip>
-          </motion.div>
-        </FilterSection>
 
         {/* Menu Items Grids */}
         <AnimatePresence mode="popLayout">
