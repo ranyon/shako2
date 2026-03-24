@@ -2,10 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import SyncedSlider from './SyncedSlider';
 
-// Import generated assets (using full paths for now to ensure visibility)
-import platter1 from './hero_waakye.png';
-import platter2 from './hero_jollof.png';
-import platter3 from './hero_banku.png';
+// Import generated assets
+import heroPepperNoodles from './hero_pepper_noodles.png';
+import heroSpicyGoatJollof from './hero_spicy_goat_jollof.png';
+import heroLoadedFries from './hero_loaded_fries.png';
 
 const HeroWrapper = styled.section`
   padding: 95px 0 5px;
@@ -21,7 +21,7 @@ const HeroSection = () => {
       title: 'Pepper Noodles',
       description: 'Perfectly seasoned spicy noodles with assorted proteins and fresh vegetables.',
       price: '₵90.00',
-      image: platter1,
+      image: heroPepperNoodles,
       onPrimaryClick: () => window.location.href = '/order',
       onSecondaryClick: () => console.log('Book Table'),
     },
@@ -30,7 +30,7 @@ const HeroSection = () => {
       title: 'Spicy Goat Jollof',
       description: 'Authentic Jollof rice served with tender, spicy grilled goat meat for a true heritage taste.',
       price: '₵110.00',
-      image: platter2,
+      image: heroSpicyGoatJollof,
       onPrimaryClick: () => window.location.href = '/order',
       onSecondaryClick: () => console.log('Book Table'),
     },
@@ -39,7 +39,7 @@ const HeroSection = () => {
       title: 'Loaded Fries',
       description: 'Crispy golden fries topped with savory proteins, signature sauces, and melted cheese.',
       price: '₵100.00',
-      image: platter3,
+      image: heroLoadedFries,
       onPrimaryClick: () => window.location.href = '/order',
       onSecondaryClick: () => console.log('Book Table'),
     },
