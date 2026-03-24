@@ -1,65 +1,338 @@
-.search-bar {
-    margin-bottom: 20px;
-  }
-  
-  .category-name {
-    color: #ff4500;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  }
-  
-  .menu-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #eee;
-  }
-  
-  .menu-item-image {
-    width: 80px;
-    height: 80px;
-    object-fit: cover;
-    margin-right: 20px;
-    border-radius: 40px;
-  }
-  
-  .menu-item-info {
-    flex-grow: 1;
-  }
-  
-  .menu-item-name {
-    margin: 0;
-    font-size: 18px;
-  }
-  
-  .menu-item-description {
-    margin: 5px 0;
-    color: #969696;
-    font-size: 14px;
-  }
-  
-  .menu-item-price {
-    font-weight: bold;
-    font-size: 16px;
-    margin-right: 10px;
-  }
-  
-  .cart-container {
-    position: sticky;
-    top: 20px;
-  }
+/* Premium Order Page Styles */
+.order-page-wrapper {
+  background-color: var(--bg-overlay);
+  /* Match dark theme */
+  min-height: 100vh;
+  position: relative;
+  z-index: 1;
+}
 
-  /* Add to your existing OrderPage.css */
+/* 2-Column Layout */
+.order-layout-grid {
+  display: grid;
+  grid-template-columns: 1fr 340px;
+  gap: 30px;
+  align-items: start;
+}
 
-/* Animation for the floating cart button */
+@media (max-width: 991px) {
+  .order-layout-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Category Strip (Horizontal) */
+.category-strip {
+  display: flex;
+  overflow-x: auto;
+  gap: 15px;
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--accent-primary) rgba(255, 255, 255, 0.05);
+}
+
+.category-strip::-webkit-scrollbar {
+  height: 6px;
+}
+
+.category-strip::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+}
+
+.category-strip::-webkit-scrollbar-thumb {
+  background: var(--accent-primary);
+  border-radius: 10px;
+}
+
+.category-pill {
+  white-space: nowrap;
+  padding: 12px 24px;
+  border-radius: 30px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.category-pill:hover,
+.category-pill.active {
+  background: var(--accent-primary);
+  color: white;
+  border-color: var(--accent-primary);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+}
+
+/* Menu Items Grid */
+.menu-items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 25px;
+}
+
+.premium-product-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+.premium-product-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border-color: rgba(255, 107, 0, 0.3);
+}
+
+.product-image-container {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.product-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.premium-product-card:hover .product-image-container img {
+  transform: scale(1.05);
+}
+
+.product-details {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.product-name {
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+
+.product-desc {
+  color: var(--text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  flex-grow: 1;
+}
+
+.product-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+}
+
+.product-price {
+  color: var(--accent-primary);
+  font-weight: 800;
+  font-size: 1.2rem;
+}
+
+.add-btn {
+  background: rgba(255, 107, 0, 0.1);
+  color: var(--accent-primary);
+  border: 1px solid rgba(255, 107, 0, 0.2);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background: var(--accent-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+/* Search Bar Premium */
+.premium-search {
+  background: var(--glass-bg) !important;
+  border: 1px solid var(--glass-border) !important;
+  color: var(--text-primary) !important;
+  border-radius: 30px !important;
+  padding: 15px 25px !important;
+  font-size: 1rem !important;
+  backdrop-filter: blur(10px);
+  margin-bottom: 30px;
+}
+
+.premium-search:focus {
+  border-color: var(--accent-primary) !important;
+  box-shadow: 0 0 0 0.25rem rgba(255, 107, 0, 0.25) !important;
+}
+
+.premium-search::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* Premium Cart Sidebar */
+.premium-cart-sidebar {
+  position: sticky;
+  top: 120px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 20px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - 140px);
+}
+
+.cart-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cart-items-container {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  scrollbar-width: thin;
+  padding-right: 10px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  background: rgba(0, 0, 0, 0.2);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+.cart-item-info {
+  flex: 1;
+}
+
+.cart-item-name {
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: 5px;
+}
+
+.cart-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 5px;
+}
+
+.qty-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.qty-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.qty-btn.minus:hover {
+  color: #ff4d4d;
+}
+
+.qty-text {
+  color: var(--text-primary);
+  font-weight: 600;
+  min-width: 20px;
+  text-align: center;
+}
+
+.cart-total-section {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 20px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  margin-bottom: 20px;
+}
+
+.checkout-btn {
+  background: var(--accent-primary);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 15px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.checkout-btn:hover:not(:disabled) {
+  background: var(--accent-secondary);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 107, 0, 0.2);
+}
+
+.checkout-btn:disabled {
+  background: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.4);
+  cursor: not-allowed;
+}
+
+.empty-cart-msg {
+  text-align: center;
+  color: var(--text-secondary);
+  padding: 40px 0;
+  font-style: italic;
+}
+
+/* Animations */
 @keyframes pulse {
   0% {
     transform: scale(1);
   }
+
   50% {
     transform: scale(1.1);
   }
+
   100% {
     transform: scale(1);
   }
@@ -69,51 +342,16 @@
   transition: all 0.3s ease;
 }
 
-/* Add a subtle pulse animation when the cart first appears or when items are added */
 .floating-cart-button.new-item {
   animation: pulse 0.5s ease-in-out;
 }
 
-/* Hide the floating button on desktop */
-@media (min-width: 768px) {
+@media (min-width: 992px) {
   .floating-cart-button {
     display: none !important;
   }
 }
 
-
-/* Add to your existing OrderPage.css */
-
-/* Animation for the floating cart button */
-@keyframes pulse {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-.floating-cart-button {
-  transition: all 0.3s ease;
-}
-
-/* Add a subtle pulse animation when the cart first appears or when items are added */
-.floating-cart-button.new-item {
-  animation: pulse 0.5s ease-in-out;
-}
-
-/* Hide the floating button on desktop */
-@media (min-width: 768px) {
-  .floating-cart-button {
-    display: none !important;
-  }
-}
-
-/* Back to top button styles */
 .back-to-top-button {
   transition: opacity 0.3s, transform 0.3s;
 }
@@ -123,16 +361,14 @@
   transform: translateY(-5px);
 }
 
-/* Make sure buttons don't interfere with each other on mobile */
 @media (max-width: 767px) {
   .back-to-top-button {
     bottom: 20px !important;
     left: 20px !important;
   }
-  
+
   .floating-cart-button {
     bottom: 20px !important;
     right: 20px !important;
   }
 }
-
