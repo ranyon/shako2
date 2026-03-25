@@ -13,6 +13,8 @@ import UpdateOrderStatusPage from './Components/order/UpdateOrderStatusPage';
 import CartPage from './Components/order/CartPage';
 import AdminDashboard from './Components/Admin/AdminDashboard';
 import Footer from './Components/Footer/Footer';
+import { supabase } from './supabaseClient';
+import { themes } from './themes';
 import './App.css';
 
 // Import images for blurred background elements
@@ -46,7 +48,44 @@ function App() {
       once: true,
     });
 
+    // Theme Initialisation & Real-time Update
+    const applyTheme = (themeKey) => {
+      const theme = themes[themeKey] || themes.lush;
+      Object.entries(theme.colors).forEach(([property, value]) => {
+        document.documentElement.style.setProperty(property, value);
+      });
+    };
+
+    const fetchAndApplyTheme = async () => {
+      const { data } = await supabase
+        .from('store_settings')
+        .select('value')
+        .eq('key', 'current_theme')
+        .single();
+
+      if (data) applyTheme(data.value);
+    };
+
+    fetchAndApplyTheme();
+
+    // Listen for theme changes
+    const themeSubscription = supabase
+      .channel('public:store_settings_theme')
+      .on('postgres_changes', {
+        event: 'UPDATE',
+        schema: 'public',
+        table: 'store_settings',
+        filter: 'key=eq.current_theme'
+      }, payload => {
+        applyTheme(payload.new.value);
+      })
+      .subscribe();
+
     setLoading(false);
+
+    return () => {
+      supabase.removeChannel(themeSubscription);
+    };
   }, []);
 
   if (loading) {

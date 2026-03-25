@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Form, Button, Card, Row, Col, InputGroup, Alert } from 'react-bootstrap';
 import { supabase } from '../../supabaseClient';
-import { Settings, Save, Smartphone, Clock, Power } from 'lucide-react';
+import { Settings, Save, Smartphone, Clock, Power, Palette, CheckCircle } from 'lucide-react';
+import { themes } from '../../themes';
 import styled from 'styled-components';
 
 const StyledCard = styled(Card)`
@@ -63,6 +64,36 @@ const StoreSettings = () => {
             </div>
 
             {message && <Alert variant={message.type} className="mb-4">{message.text}</Alert>}
+
+            <StyledCard className="p-4">
+                <h5 className="mb-4 d-flex align-items-center gap-2">
+                    <Palette size={20} className="text-warning" /> Visual Identity (Theme)
+                </h5>
+                <Row className="g-3">
+                    {Object.entries(themes).map(([key, theme]) => (
+                        <Col key={key} sm={4}>
+                            <div
+                                className={`p-3 rounded-3 border-2 cursor-pointer transition-all ${settings.current_theme === key ? 'border-warning bg-warning bg-opacity-10' : 'border-secondary'}`}
+                                style={{
+                                    border: '2px solid',
+                                    cursor: 'pointer',
+                                    background: settings.current_theme === key ? 'rgba(212, 175, 55, 0.1)' : 'rgba(255,255,255,0.02)'
+                                }}
+                                onClick={() => updateSetting('current_theme', key)}
+                            >
+                                <div className="d-flex justify-content-between align-items-center mb-3">
+                                    <span className="fw-bold small">{theme.name}</span>
+                                    {settings.current_theme === key && <CheckCircle size={16} className="text-warning" />}
+                                </div>
+                                <div className="d-flex gap-1 h-10px">
+                                    <div style={{ flex: 1, height: '10px', background: theme.colors['--bg-primary'], borderRadius: '2px' }} />
+                                    <div style={{ flex: 1, height: '10px', background: theme.colors['--accent-primary'], borderRadius: '2px' }} />
+                                </div>
+                            </div>
+                        </Col>
+                    ))}
+                </Row>
+            </StyledCard>
 
             <StyledCard className="p-4">
                 <h5 className="mb-4 d-flex align-items-center gap-2">
