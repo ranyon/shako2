@@ -15,7 +15,7 @@ export const menuItems = [
     id: 1,
     name: 'Pepper Noodles',
     description: 'Perfectly seasoned spicy noodles with assorted proteins and vegetables.',
-    price: 90.00,
+    price: 200,
     category: 1,
     image: PepperNoodlesImg
   },
@@ -23,7 +23,7 @@ export const menuItems = [
     id: 2,
     name: 'Spicy Goat Jollof',
     description: 'Authentic Jollof rice served with tender, spicy grilled goat meat.',
-    price: 110.00,
+    price: 250,
     category: 1,
     image: SpicyGoatJollofImg
   },
@@ -31,7 +31,7 @@ export const menuItems = [
     id: 3,
     name: 'Loaded Fries',
     description: 'Crispy golden fries topped with savory proteins, signature sauces, and melted cheese.',
-    price: 100.00,
+    price: 200,
     category: 1,
     image: LoadedFriesImg
   }
