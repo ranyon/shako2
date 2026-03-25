@@ -40,18 +40,19 @@ const MenuItemsSection = ({
             </div>
 
             <div className="product-details">
-              <h3 className="product-name">{item.name}</h3>
+              <h3 className="product-name" style={{ fontFamily: "'Outfit', sans-serif" }}>{item.name}</h3>
               <p className="product-desc">{item.description}</p>
 
               <div className="product-footer">
-                <span className="product-price">₵{item.price.toFixed(2)}</span>
-                <button
+                <span className="product-price" style={{ fontFamily: "'Outfit', sans-serif" }}>₵{item.price.toFixed(2)}</span>
+                <motion.button
+                  whileTap={{ scale: 0.9 }}
                   className="add-btn"
                   onClick={() => addToCart(item)}
                   title="Add to Order"
                 >
                   <Plus size={20} />
-                </button>
+                </motion.button>
               </div>
             </div>
           </motion.div>

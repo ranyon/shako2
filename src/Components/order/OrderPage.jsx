@@ -178,7 +178,7 @@ const OrderPage = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <h1 className="text-center mb-4" style={{ color: 'var(--text-primary)', fontWeight: 800 }}>
+          <h1 className="text-center mb-4" style={{ color: 'var(--text-primary)', fontWeight: 800, fontFamily: "'Outfit', sans-serif", fontSize: '3rem' }}>
             Find Your Flavor.
           </h1>
         </motion.div>
