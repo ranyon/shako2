@@ -232,6 +232,7 @@ const HeroGrid = styled.div`
   overflow: hidden;
 
   @media (max-width: 991px) {
+    display: flex;
     flex-direction: column-reverse;
     text-align: center;
     gap: 2rem;
