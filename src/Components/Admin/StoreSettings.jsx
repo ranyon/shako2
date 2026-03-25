@@ -40,16 +40,25 @@ const StoreSettings = () => {
 
     const updateSetting = async (key, value) => {
         setSaving(true);
+        setMessage(null);
+
         const { error } = await supabase
             .from('store_settings')
-            .update({ value: String(value), updated_at: new Date().toISOString() })
-            .eq('key', key);
+            .upsert({
+                key: key,
+                value: String(value),
+                updated_at: new Date().toISOString()
+            });
 
         if (error) {
-            setMessage({ type: 'danger', text: `Failed to update ${key}` });
+            console.error(`Error updating ${key}:`, error);
+            setMessage({
+                type: 'danger',
+                text: `Database Error: ${error.message}. Make sure you've run the SQL script in Supabase.`
+            });
         } else {
             setSettings(prev => ({ ...prev, [key]: value }));
-            setMessage({ type: 'success', text: 'Settings updated successfully!' });
+            setMessage({ type: 'success', text: `Successfully updated ${key.replace(/_/g, ' ')}!` });
             setTimeout(() => setMessage(null), 3000);
         }
         setSaving(false);
