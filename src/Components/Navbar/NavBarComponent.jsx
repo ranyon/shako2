@@ -33,14 +33,15 @@ const NavbarComponent = () => {
         {/* Center: Brand Text Logo */}
         <Navbar.Brand as={Link} to="/" className="m-0 position-absolute start-50 translate-middle-x d-flex align-items-center" onClick={() => setExpanded(false)}>
           <span style={{
-            fontSize: '1.8rem',
-            fontWeight: 800,
-            letterSpacing: '3px',
-            color: 'var(--accent-primary)',
-            textTransform: 'uppercase',
-            fontFamily: "'Inter', sans-serif"
+            fontSize: '2.2rem',
+            fontWeight: 500,
+            letterSpacing: '0px',
+            color: '#FFFFFF',
+            textTransform: 'none',
+            fontFamily: "'Outfit', sans-serif",
+            paddingTop: '5px'
           }}>
-            SHAKO MAKO
+            Shako Mako
           </span>
         </Navbar.Brand>
 
