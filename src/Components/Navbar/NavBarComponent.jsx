@@ -3,7 +3,6 @@ import { Navbar, Container, Nav, Badge, Offcanvas } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { ShoppingCart, Menu } from 'lucide-react';
 import './Navbar.css';
-import Logo from '../../assets/logo.png';
 import { useOrderState } from '../order/useOrderState';
 
 const NavbarComponent = () => {
@@ -31,14 +30,18 @@ const NavbarComponent = () => {
           </Nav.Link>
         </div>
 
-        {/* Center: Logo */}
-        <Navbar.Brand as={Link} to="/" className="m-0 position-absolute start-50 translate-middle-x" onClick={() => setExpanded(false)}>
-          <img
-            src={Logo}
-            alt="Shako Mako Logo"
-            height="55"
-            style={{ width: 'auto' }}
-          />
+        {/* Center: Brand Text Logo */}
+        <Navbar.Brand as={Link} to="/" className="m-0 position-absolute start-50 translate-middle-x d-flex align-items-center" onClick={() => setExpanded(false)}>
+          <span style={{
+            fontSize: '1.8rem',
+            fontWeight: 800,
+            letterSpacing: '3px',
+            color: 'var(--accent-primary)',
+            textTransform: 'uppercase',
+            fontFamily: "'Inter', sans-serif"
+          }}>
+            SHAKO MAKO
+          </span>
         </Navbar.Brand>
 
         {/* Right: Hamburger Toggle */}
