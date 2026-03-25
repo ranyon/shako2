@@ -40,8 +40,12 @@ const TextContent = styled.div`
     line-height: 1.1;
     margin-bottom: 2rem;
     
+    @media (max-width: 991px) {
+      font-size: 3.5rem;
+    }
+    
     @media (max-width: 768px) {
-      font-size: 3rem;
+      font-size: 2.5rem;
     }
   }
 
@@ -139,8 +143,9 @@ const FloatingPrice = styled(motion.div)`
   text-shadow: 0 2px 4px rgba(0,0,0,0.2);
   
   @media (max-width: 991px) {
-    top: -5%;
-    left: 15%;
+    top: 5%;
+    left: 50%;
+    transform: translateX(-50%) !important;
   }
 `;
 
@@ -171,6 +176,28 @@ const ThumbCard = styled.div`
   gap: 1.5rem;
   min-width: 280px;
   transition: var(--transition-smooth);
+  
+  @media (max-width: 768px) {
+    min-width: 220px;
+    padding: 0.75rem;
+    gap: 1rem;
+  }
+
+  @media (max-width: 480px) {
+    min-width: 160px;
+    padding: 0.5rem;
+    gap: 0.5rem;
+    
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 10px;
+    }
+    
+    .info h4 {
+      font-size: 0.9rem;
+    }
+  }
 
   &.active {
     background: rgba(255, 255, 255, 0.08);
@@ -198,11 +225,11 @@ const ThumbCard = styled.div`
 `;
 
 const HeroGrid = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4rem;
-  min-height: auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  min-height: 100vh;
   position: relative;
+  overflow: hidden;
 
   @media (max-width: 991px) {
     flex-direction: column-reverse;
@@ -246,7 +273,7 @@ const SyncedSlider = ({ slides }) => {
               transition={{ duration: 0.6 }}
             >
               <Badge>{currentSlide.badge}</Badge>
-              <h1 style={{ fontSize: '4.5rem', fontWeight: 800, lineHeight: 1.1, marginBottom: '1rem' }}>
+              <h1 style={{ fontWeight: 800, lineHeight: 1.1, marginBottom: '1rem' }} className="hero-main-title">
                 It's not just<br />Food, It's an<br /><span style={{ color: 'var(--accent-primary)' }}>Experience.</span>
               </h1>
               <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', marginBottom: '1.5rem', maxWidth: '500px' }}>

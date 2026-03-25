@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { motion, AnimatePresence } from 'framer-motion';
-import { categories, menuItems } from '../order/menuData';
+import { categories as defaultCategories, menuItems as defaultMenuItems } from '../order/menuData';
+import { supabase } from '../../supabaseClient';
 import { ArrowRight, ListFilter } from 'lucide-react';
 
 // Import representative images for categories
@@ -252,11 +253,49 @@ const getCategoryImage = (categoryId) => {
 
 const Menu = () => {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [menuItems, setMenuItems] = useState(defaultMenuItems);
+  const [categories, setCategories] = useState(defaultCategories);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      // Fetch Categories
+      const { data: dbCategories } = await supabase.from('categories').select('*');
+      if (dbCategories && dbCategories.length > 0) {
+        setCategories(dbCategories);
+      }
+
+      // Fetch Menu Items
+      const { data: dbMenuItems } = await supabase.from('menu_items').select('*').eq('is_available', true);
+      if (dbMenuItems && dbMenuItems.length > 0) {
+        const formattedItems = dbMenuItems.map(item => ({
+          ...item,
+          category: item.category_id,
+          image: item.image_url,
+          price: parseFloat(item.price)
+        }));
+        setMenuItems(formattedItems);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, []);
 
   // Filter categories based on selection
   const visibleCategories = activeCategory === 'All'
     ? categories
     : categories.filter(c => c.id === activeCategory);
+
+  if (loading) return (
+    <PageWrapper>
+      <Container className="text-center py-5">
+        <div className="spinner-border text-warning" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+      </Container>
+    </PageWrapper>
+  );
 
   return (
     <PageWrapper>

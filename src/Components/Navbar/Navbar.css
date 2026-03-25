@@ -1,4 +1,34 @@
 .navbar-overlay {
-    position: relative;
-    z-index: 1; /* Ensure the navbar is above the background */
+  position: relative;
+  z-index: 1;
+  /* Ensure the navbar is above the background */
+}
+
+.navbar-brand-text {
+  font-size: 2.2rem;
+  font-weight: 500;
+  letter-spacing: 0px;
+  color: #FFFFFF;
+  text-transform: none;
+  font-family: 'Outfit', sans-serif;
+  padding-top: 5px;
+  transition: all 0.3s ease;
+}
+
+@media (max-width: 850px) {
+  .navbar-brand-text {
+    font-size: 1.8rem;
   }
+}
+
+@media (max-width: 768px) {
+  .navbar-brand-text {
+    font-size: 1.6rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .navbar-brand-text {
+    font-size: 1.3rem;
+  }
+}
