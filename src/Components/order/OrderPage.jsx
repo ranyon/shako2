@@ -16,10 +16,9 @@ import CountdownTimer from './CountdownTimer';
 // Hooks
 import { useOrderState } from './useOrderState';
 import { useOrderHandlers } from './useOrderHandler';
-import { v4 as uuidv4 } from 'uuid';
-
 // Data
-import { categories, menuItems } from './menuData';
+import { categories as defaultCategories, menuItems as defaultMenuItems } from './menuData';
+import { supabase } from '../../supabaseClient';
 
 // Styles
 import './OrderPage.css';
@@ -31,10 +30,18 @@ const OrderPage = () => {
   const orderState = useOrderState(categoryId);
   const { handlePayment, handleAddToCart, handleRemoveFromCart, calculateTotal } = useOrderHandlers(orderState);
   const [showThankYou, setShowThankYou] = useState(false);
-  const openingTime = '10:00:00';
-  const closingTime = '21:30:00';
+
+  const [menuItems, setMenuItems] = useState(defaultMenuItems);
+  const [categories, setCategories] = useState(defaultCategories);
+  const [storeSettings, setStoreSettings] = useState({
+    business_momo: "0598942315",
+    opening_time: '10:00:00',
+    closing_time: '21:30:00',
+    is_restaurant_open: 'true'
+  });
+
   const [isClosed, setIsClosed] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(closingTime));
+  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft(storeSettings.closing_time));
 
   const {
     selectedCategory,
@@ -62,15 +69,42 @@ const OrderPage = () => {
   } = orderState;
 
   useEffect(() => {
+    const fetchData = async () => {
+      // Fetch Store Settings
+      const { data: settingsData } = await supabase.from('store_settings').select('*');
+      if (settingsData) {
+        const settingsMap = {};
+        settingsData.forEach(s => settingsMap[s.key] = s.value);
+        setStoreSettings(prev => ({ ...prev, ...settingsMap }));
+      }
+
+      // Fetch Menu Items
+      const { data: dbMenuItems } = await supabase.from('menu_items').select('*').eq('is_available', true);
+      if (dbMenuItems && dbMenuItems.length > 0) {
+        const formattedItems = dbMenuItems.map(item => ({
+          ...item,
+          category: item.category_id, // Map database field to component field
+          price: parseFloat(item.price)
+        }));
+        setMenuItems(formattedItems);
+      }
+    };
+
+    fetchData();
+
     const checkOpeningHours = () => {
       const now = new Date();
       const currentHour = now.getHours();
       const currentMinute = now.getMinutes();
       const currentTime = currentHour * 60 + currentMinute;
-      const openingTimeMinutes = 10 * 60;
-      const closingTimeMinutes = 21 * 60 + 30;
 
-      if (currentTime < openingTimeMinutes || currentTime >= closingTimeMinutes) {
+      const [oHour, oMin] = (storeSettings.opening_time || '10:00:00').split(':').map(Number);
+      const [cHour, cMin] = (storeSettings.closing_time || '21:30:00').split(':').map(Number);
+
+      const openingTimeMinutes = oHour * 60 + oMin;
+      const closingTimeMinutes = cHour * 60 + cMin;
+
+      if (storeSettings.is_restaurant_open === 'false' || currentTime < openingTimeMinutes || currentTime >= closingTimeMinutes) {
         setIsClosed(true);
       } else {
         setIsClosed(false);
@@ -80,7 +114,7 @@ const OrderPage = () => {
     checkOpeningHours();
     const interval = setInterval(checkOpeningHours, 60000);
     return () => clearInterval(interval);
-  }, []);
+  }, [storeSettings.opening_time, storeSettings.closing_time, storeSettings.is_restaurant_open]);
 
   useEffect(() => {
     if (categoryId) {
@@ -107,14 +141,14 @@ const OrderPage = () => {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      const newTimeLeft = calculateTimeLeft(closingTime);
+      const newTimeLeft = calculateTimeLeft(storeSettings.closing_time);
       setTimeLeft(newTimeLeft);
       if (newTimeLeft.hours === undefined) {
         setIsClosed(true);
       }
     }, 1000);
     return () => clearInterval(timer);
-  }, [closingTime]);
+  }, [storeSettings.closing_time]);
 
   function calculateTimeLeft(closingTime) {
     const now = new Date();
@@ -162,7 +196,7 @@ const OrderPage = () => {
         {isClosed ? (
           <Alert variant="danger" className="text-center mb-4" style={{ background: 'rgba(220, 53, 69, 0.1)', border: '1px solid rgba(220, 53, 69, 0.3)', color: '#ffb3b8' }}>
             <h4 className="alert-heading">Restaurant Closed</h4>
-            <p>We are currently closed. Please check back at 10 AM.</p>
+            <p>{storeSettings.is_restaurant_open === 'false' ? 'We are currently not taking orders.' : `We are currently closed. Please check back at ${storeSettings.opening_time}.`}</p>
           </Alert>
         ) : (
           <div className="order-layout-grid mt-4">
@@ -202,7 +236,7 @@ const OrderPage = () => {
           setShowModal={setShowModal}
           errorMessage={errorMessage}
           getTotalPrice={calculateTotal}
-          BUSINESS_MOMO={BUSINESS_MOMO}
+          BUSINESS_MOMO={storeSettings.business_momo}
           network={network}
           setNetwork={setNetwork}
           customerPhone={customerPhone}

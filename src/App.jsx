@@ -11,6 +11,7 @@ import OrderPage from './Components/order/OrderPage';
 import OrderStatusPage from './Components/order/OrderStatusPage';
 import UpdateOrderStatusPage from './Components/order/UpdateOrderStatusPage';
 import CartPage from './Components/order/CartPage';
+import AdminDashboard from './Components/Admin/AdminDashboard';
 import Footer from './Components/Footer/Footer';
 import './App.css';
 
@@ -80,6 +81,7 @@ function App() {
             <Route path="/order-status/:orderId" element={<OrderStatusPage />} />
             <Route path="/updateorderstatus" element={<UpdateOrderStatusPage />} />
             <Route path="/cart" element={<CartPage />} />
+            <Route path="/admin" element={<AdminDashboard />} />
           </Routes>
           <div id="contact">
             <Footer />

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Alert } from 'react-bootstrap';
 import { PaystackButton } from 'react-paystack';
 import { sendToTelegram, validatePhoneNumber } from './orderUtils';
+import { supabase } from '../../supabaseClient';
 
 const PaymentModal = ({
   setOrderId,
@@ -49,39 +50,39 @@ const PaymentModal = ({
 
   const getFieldErrors = () => {
     const errors = {};
-    
+
     if (!customerName.trim()) {
       errors.name = 'Please enter your full name';
     }
-    
+
     if (!validatePhoneNumber(customerPhone)) {
       errors.phone = 'Please enter a valid Ghana phone number (233XXXXXXXXX)';
     }
-    
+
     if (!deliveryLocation.trim()) {
       errors.location = 'Please enter your delivery location';
     } else if (deliveryLocation.length < 10) {
       errors.location = 'Please provide a more detailed delivery address (at least 10 characters)';
     }
-    
+
     if (!customerEmail.trim()) {
       errors.email = 'Please enter your email address';
     } else if (!customerEmail.includes('@')) {
       errors.email = 'Please enter a valid email address';
     }
-    
+
     return errors;
   };
 
   const validateForm = () => {
     const errors = getFieldErrors();
-    
+
     if (Object.keys(errors).length > 0) {
       const errorMessage = Object.values(errors)[0];
       setValidationError(errorMessage);
       return false;
     }
-    
+
     setValidationError('');
     return true;
   };
@@ -108,13 +109,13 @@ const PaymentModal = ({
       default:
         break;
     }
-    
+
     // Mark the field as touched
     setTouchedFields(prev => ({
       ...prev,
       [field]: true
     }));
-    
+
     // Clear validation error when user starts typing
     setValidationError('');
   };
@@ -138,7 +139,7 @@ const PaymentModal = ({
 
   const handleAttemptPayment = () => {
     setAttemptedSubmit(true);
-    if(validateForm()) {
+    if (validateForm()) {
       setShowPaystackButton(true);
     } else {
       setShowPaystackButton(false);
@@ -149,7 +150,7 @@ const PaymentModal = ({
     try {
       setIsProcessing(true);
       setPaymentStatus('processing');
-      
+
       if (!reference || !reference.reference || !reference.status || reference.status !== 'success') {
         setValidationError('Payment verification failed. Please try again.');
         setPaymentStatus('failed');
@@ -181,19 +182,39 @@ const PaymentModal = ({
         [currentOrderId]: orderData
       }));
 
+      // Save to Supabase
+      const { error: supabaseError } = await supabase
+        .from('orders')
+        .insert([{
+          short_id: currentOrderId,
+          customer_name: customerName,
+          customer_phone: customerPhone,
+          customer_email: customerEmail,
+          delivery_location: deliveryLocation,
+          items: cartItems,
+          total_amount: getTotalPrice(),
+          payment_reference: reference.reference,
+          status: 'Order Received'
+        }]);
+
+      if (supabaseError) {
+        console.error('Error saving to Supabase:', supabaseError);
+        // We continue anyway since it's saved locally and notification is sent
+      }
+
       // Send notification to Telegram
       await sendToTelegram(orderData);
 
       setPaymentStatus('success');
-      
+
       // Clear the cart after successful payment
       if (clearCart) {
         clearCart();
       }
-      
+
       setShowModal(false);
       setOrderPlaced(true);
-      
+
       // Reset the form
       resetForm();
 
@@ -333,13 +354,13 @@ const PaymentModal = ({
 
         <div className="mt-4">
           {showPaystackButton ? (
-            <PaystackButton 
-              {...componentProps} 
+            <PaystackButton
+              {...componentProps}
               className="w-100 btn btn-success"
             />
           ) : (
-            <Button 
-              variant="primary" 
+            <Button
+              variant="primary"
               className="w-100"
               onClick={handleAttemptPayment}
               disabled={isProcessing}
@@ -347,7 +368,7 @@ const PaymentModal = ({
               {isProcessing ? 'Processing...' : 'Proceed to Payment'}
             </Button>
           )}
-          
+
           {attemptedSubmit && !isFormValid() && (
             <Alert variant="warning" className="mt-3">
               Please correct the errors above before proceeding with payment.
@@ -356,8 +377,8 @@ const PaymentModal = ({
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button 
-          variant="secondary" 
+        <Button
+          variant="secondary"
           onClick={handleModalClose}
           disabled={isProcessing}
         >
