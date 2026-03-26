@@ -60,7 +60,7 @@ const MenuItemsSection = ({
       </div>
 
       {filteredMenuItems.length === 0 && (
-        <div style={{ textAlign: 'center', color: 'var(--text-secondary)', padding: '40px 0' }}>
+        <div style={{ textAlign: 'center', color: 'var(--text-muted)', padding: '40px 0' }}>
           <h4>No items found</h4>
           <p>Try searching for something else, or select another category.</p>
         </div>

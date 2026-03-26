@@ -9,8 +9,9 @@ const StyledCard = styled(Card)`
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-soft);
+  color: var(--text-primary);
   margin-bottom: 24px;
 `;
 
@@ -82,11 +83,11 @@ const StoreSettings = () => {
                     {Object.entries(themes).map(([key, theme]) => (
                         <Col key={key} sm={4}>
                             <div
-                                className={`p-3 rounded-3 border-2 cursor-pointer transition-all ${settings.current_theme === key ? 'border-warning bg-warning bg-opacity-10' : 'border-secondary'}`}
+                                className={`p-3 rounded-3 border-2 cursor-pointer transition-all ${settings.current_theme === key ? 'border-warning bg-warning bg-opacity-10' : 'border-light'}`}
                                 style={{
                                     border: '2px solid',
                                     cursor: 'pointer',
-                                    background: settings.current_theme === key ? 'rgba(212, 175, 55, 0.1)' : 'rgba(255,255,255,0.02)'
+                                    background: settings.current_theme === key ? 'rgba(212, 175, 55, 0.1)' : 'rgba(0,0,0,0.02)'
                                 }}
                                 onClick={() => updateSetting('current_theme', key)}
                             >
@@ -115,7 +116,7 @@ const StoreSettings = () => {
                             type="text"
                             value={settings.business_momo || ''}
                             onChange={e => setSettings({ ...settings, business_momo: e.target.value })}
-                            className="bg-transparent text-white border-secondary"
+                            className="bg-transparent text-dark border-light"
                         />
                         <Button
                             variant="warning"
@@ -125,7 +126,7 @@ const StoreSettings = () => {
                             <Save size={18} />
                         </Button>
                     </InputGroup>
-                    <Form.Text className="text-secondary">This number will be displayed to customers during checkout.</Form.Text>
+                    <Form.Text className="text-muted">This number will be displayed to customers during checkout.</Form.Text>
                 </Form.Group>
             </StyledCard>
 
@@ -141,14 +142,14 @@ const StoreSettings = () => {
                                 type="time"
                                 value={settings.opening_time || ''}
                                 onChange={e => setSettings({ ...settings, opening_time: e.target.value })}
-                                className="bg-transparent text-white border-secondary mb-3"
+                                className="bg-transparent text-dark border-light mb-3"
                             />
                             <Form.Label>Closing Time</Form.Label>
                             <Form.Control
                                 type="time"
                                 value={settings.closing_time || ''}
                                 onChange={e => setSettings({ ...settings, closing_time: e.target.value })}
-                                className="bg-transparent text-white border-secondary"
+                                className="bg-transparent text-dark border-light"
                             />
                             <Button
                                 variant="outline-warning"

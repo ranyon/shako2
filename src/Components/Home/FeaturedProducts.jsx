@@ -44,7 +44,7 @@ const FeaturedProducts = () => {
                     <h2 style={{ fontSize: '3rem', fontWeight: 700, marginBottom: '1rem' }}>
                         Featured <span style={{ color: 'var(--accent-primary)' }}>Signatures</span>
                     </h2>
-                    <p style={{ color: 'var(--text-secondary)', fontSize: '1.2rem' }}>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '1.2rem' }}>
                         A taste of our most beloved culinary creations.
                     </p>
                 </div>
@@ -65,7 +65,7 @@ const FeaturedProducts = () => {
                                         <Card.Title style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>
                                             {item.name}
                                         </Card.Title>
-                                        <Card.Text style={{ color: 'var(--text-secondary)', flexGrow: 1 }}>
+                                        <Card.Text style={{ color: 'var(--text-muted)', flexGrow: 1 }}>
                                             {item.description}
                                         </Card.Text>
                                         <div className="d-flex justify-content-between align-items-center mt-3">

@@ -8,8 +8,9 @@ const StyledCard = styled(Card)`
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-soft);
+  color: var(--text-primary);
 `;
 
 const MenuManager = () => {
@@ -107,7 +108,7 @@ const MenuManager = () => {
             </div>
 
             <StyledCard className="p-0 overflow-hidden">
-                <Table responsive hover variant="dark" className="mb-0">
+                <Table responsive hover variant="light" className="mb-0">
                     <thead>
                         <tr>
                             <th className="px-4">Dish</th>
@@ -126,7 +127,7 @@ const MenuManager = () => {
                                         <span className="fw-bold">{item.name}</span>
                                     </div>
                                 </td>
-                                <td className="py-3 align-middle text-secondary small">{item.description}</td>
+                                <td className="py-3 align-middle text-muted small">{item.description}</td>
                                 <td className="py-3 align-middle fw-bold text-warning">₵{parseFloat(item.price).toFixed(2)}</td>
                                 <td className="py-3 align-middle">
                                     <Button
@@ -153,10 +154,10 @@ const MenuManager = () => {
             </StyledCard>
 
             <Modal show={showModal} onHide={() => setShowModal(false)} centered contentClassName="glass-modal">
-                <Modal.Header closeButton closeVariant="white" className="border-secondary bg-dark text-white">
+                <Modal.Header closeButton closeVariant="white" className="border-light bg-white text-dark">
                     <Modal.Title>{editingItem ? 'Edit Dish' : 'Add New Dish'}</Modal.Title>
                 </Modal.Header>
-                <Modal.Body className="bg-dark text-white p-4">
+                <Modal.Body className="bg-white text-dark p-4">
                     <Form>
                         <Form.Group className="mb-3">
                             <Form.Label>Dish Name</Form.Label>
@@ -165,7 +166,7 @@ const MenuManager = () => {
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
                                 placeholder="e.g., Spicy Goat Jollof"
-                                className="bg-transparent text-white border-secondary"
+                                className="bg-transparent text-dark border-light"
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
@@ -174,18 +175,18 @@ const MenuManager = () => {
                                 as="textarea" rows={2}
                                 value={formData.description}
                                 onChange={e => setFormData({ ...formData, description: e.target.value })}
-                                className="bg-transparent text-white border-secondary"
+                                className="bg-transparent text-dark border-light"
                             />
                         </Form.Group>
                         <Form.Group className="mb-3">
                             <Form.Label>Price (GHS)</Form.Label>
                             <InputGroup>
-                                <InputGroup.Text className="bg-transparent text-white border-secondary">₵</InputGroup.Text>
+                                <InputGroup.Text className="bg-transparent text-dark border-light">₵</InputGroup.Text>
                                 <Form.Control
                                     type="number" step="0.01"
                                     value={formData.price}
                                     onChange={e => setFormData({ ...formData, price: e.target.value })}
-                                    className="bg-transparent text-white border-secondary"
+                                    className="bg-transparent text-dark border-light"
                                 />
                             </InputGroup>
                         </Form.Group>
@@ -196,12 +197,12 @@ const MenuManager = () => {
                                 value={formData.image_url}
                                 onChange={e => setFormData({ ...formData, image_url: e.target.value })}
                                 placeholder="/src/Components/order/foodImg/..."
-                                className="bg-transparent text-white border-secondary"
+                                className="bg-transparent text-dark border-light"
                             />
                         </Form.Group>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer className="border-secondary bg-dark">
+                <Modal.Footer className="border-light bg-white">
                     <Button variant="outline-light" onClick={() => setShowModal(false)}>Cancel</Button>
                     <Button variant="warning" onClick={handleSave}>Save Signature Item</Button>
                 </Modal.Footer>

@@ -15,6 +15,10 @@ const SliderContainer = styled.div`
   margin: 0 auto;
   padding: 2rem 8%;
   color: var(--text-primary);
+  min-height: calc(100vh - 120px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 `;
 
 const HeroContent = styled.div`
@@ -51,7 +55,7 @@ const TextContent = styled.div`
 
   p {
     font-size: 1.25rem;
-    color: var(--text-secondary);
+    color: var(--text-muted);
     margin-bottom: 3rem;
     max-width: 500px;
   }
@@ -100,7 +104,7 @@ const SecondaryButton = styled.button`
   background: transparent;
   border: 1px solid var(--glass-border);
   border-radius: 12px;
-  color: white;
+  color: var(--text-primary);
   font-weight: 600;
   font-size: 1.1rem;
   
@@ -120,7 +124,9 @@ const ImageContainer = styled.div`
     width: 100%;
     max-width: 500px;
     height: auto;
-    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.5));
+    object-fit: contain;
+    mix-blend-mode: multiply;
+    filter: drop-shadow(0 20px 50px rgba(0,0,0,0.15));
   }
 `;
 
@@ -131,7 +137,7 @@ const FloatingPrice = styled(motion.div)`
   background: linear-gradient(135deg, var(--accent-primary), #ff4500);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 0.6rem 1.75rem;
   border-radius: 50px;
   color: #ffffff;
@@ -200,7 +206,7 @@ const ThumbCard = styled.div`
   }
 
   &.active {
-    background: rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.05);
     border-color: var(--accent-primary);
   }
 
@@ -208,7 +214,8 @@ const ThumbCard = styled.div`
     width: 80px;
     height: 80px;
     border-radius: 15px;
-    object-fit: cover;
+    object-fit: contain;
+    mix-blend-mode: multiply;
   }
 
   .info {
@@ -219,7 +226,7 @@ const ThumbCard = styled.div`
     p {
       margin: 0.25rem 0 0;
       font-size: 0.9rem;
-      color: var(--text-secondary);
+      color: var(--text-muted);
     }
   }
 `;
@@ -227,13 +234,14 @@ const ThumbCard = styled.div`
 const HeroGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
-  min-height: 100vh;
+  align-items: center;
   position: relative;
   overflow: hidden;
+  margin-bottom: 3rem;
 
   @media (max-width: 991px) {
     display: flex;
-    flex-direction: column-reverse;
+    flex-direction: column;
     text-align: center;
     gap: 2rem;
     min-height: auto;
@@ -277,12 +285,12 @@ const SyncedSlider = ({ slides }) => {
               <h1 style={{ fontWeight: 800, lineHeight: 1.1, marginBottom: '1rem' }} className="hero-main-title">
                 It's not just<br />Food, It's an<br /><span style={{ color: 'var(--accent-primary)' }}>Experience.</span>
               </h1>
-              <p style={{ fontSize: '1.15rem', color: 'var(--text-secondary)', marginBottom: '1.5rem', maxWidth: '500px' }}>
+              <p style={{ fontSize: '1.15rem', color: 'var(--text-muted)', marginBottom: '1.5rem', maxWidth: '500px' }}>
                 {currentSlide.description}
               </p>
               <ButtonGroup>
                 <PrimaryButton onClick={currentSlide.onPrimaryClick}>View Menu</PrimaryButton>
-                <SecondaryButton onClick={currentSlide.onSecondaryClick}>Book A Table</SecondaryButton>
+                <SecondaryButton onClick={currentSlide.onSecondaryClick}>Order Now</SecondaryButton>
               </ButtonGroup>
             </motion.div>
           </AnimatePresence>

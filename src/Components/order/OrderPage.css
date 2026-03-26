@@ -59,7 +59,7 @@
 }
 
 .category-strip::-webkit-scrollbar-track {
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.03);
   border-radius: 10px;
 }
 
@@ -72,10 +72,10 @@
   white-space: nowrap;
   padding: 10px 22px;
   border-radius: 50px;
-  background: rgba(255, 255, 255, 0.03);
+  background: #ffffff;
   backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  color: var(--text-secondary);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  color: var(--text-muted);
   font-family: 'Outfit', sans-serif;
   font-weight: 500;
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -99,9 +99,9 @@
 }
 
 .premium-product-card {
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px);
+  background: #ffffff;
   border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
   border-radius: 20px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -111,8 +111,8 @@
 
 .premium-product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-  border-color: rgba(255, 107, 0, 0.3);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--accent-primary);
 }
 
 .product-image-container {
@@ -120,13 +120,14 @@
   height: 200px;
   overflow: hidden;
   position: relative;
-  background: rgba(0, 0, 0, 0.2);
+  background: #f8f9fa;
 }
 
 .product-image-container img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
+  mix-blend-mode: multiply;
   transition: transform 0.5s ease;
 }
 
@@ -150,7 +151,7 @@
 }
 
 .product-desc {
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--text-secondary);
   font-size: 0.85rem;
   line-height: 1.6;
   margin-bottom: 20px;
@@ -163,7 +164,7 @@
   align-items: center;
   margin-top: auto;
   padding-top: 15px;
-  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
 }
 
 .product-price {
@@ -236,7 +237,7 @@
   font-weight: 700;
   margin-bottom: 25px;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
   font-family: 'Outfit', sans-serif;
 }
 
@@ -253,7 +254,7 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 15px;
-  background: rgba(0, 0, 0, 0.2);
+  background: #f8f9fa;
   padding: 12px;
   border-radius: 12px;
 }
@@ -273,7 +274,7 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba(0, 0, 0, 0.03);
   border-radius: 20px;
   padding: 5px;
 }
@@ -293,7 +294,7 @@
 }
 
 .qty-btn:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.06);
 }
 
 .qty-btn.minus:hover {
@@ -308,7 +309,7 @@
 }
 
 .cart-total-section {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   padding-top: 20px;
 }
 
@@ -340,14 +341,14 @@
 }
 
 .checkout-btn:disabled {
-  background: rgba(255, 255, 255, 0.1);
-  color: rgba(255, 255, 255, 0.4);
+  background: rgba(0, 0, 0, 0.06);
+  color: rgba(0, 0, 0, 0.4);
   cursor: not-allowed;
 }
 
 .empty-cart-msg {
   text-align: center;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   padding: 40px 0;
   font-style: italic;
 }

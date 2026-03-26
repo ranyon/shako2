@@ -1,41 +1,41 @@
 export const themes = {
     lush: {
-        name: 'Lush Heritage',
+        name: 'Modern Coral',
         colors: {
-            '--bg-primary': '#04160a',
-            '--bg-secondary': '#0a2414',
-            '--accent-primary': '#D4AF37',
-            '--accent-secondary': '#E5C789',
-            '--text-primary': '#ffffff',
-            '--text-secondary': '#888888',
-            '--glass-bg': 'rgba(255, 255, 255, 0.03)',
-            '--glass-border': 'rgba(255, 255, 255, 0.06)',
+            '--bg-primary': '#ffffff',
+            '--bg-secondary': '#f4f7f9',
+            '--accent-primary': '#FF5A5F',
+            '--accent-secondary': '#FFB400',
+            '--text-primary': '#111827',
+            '--text-secondary': '#6B7280',
+            '--glass-bg': 'rgba(255, 255, 255, 0.7)',
+            '--glass-border': 'rgba(0, 0, 0, 0.05)',
         }
     },
     midnight: {
-        name: 'Midnight Royale',
+        name: 'Cream Royale',
         colors: {
-            '--bg-primary': '#050a1f',
-            '--bg-secondary': '#0a1128',
-            '--accent-primary': '#c0c0c0',
-            '--accent-secondary': '#e0e0e0',
-            '--text-primary': '#ffffff',
-            '--text-secondary': '#a0a0a0',
-            '--glass-bg': 'rgba(255, 255, 255, 0.05)',
-            '--glass-border': 'rgba(255, 255, 255, 0.1)',
+            '--bg-primary': '#fdfdfd',
+            '--bg-secondary': '#f0efe9',
+            '--accent-primary': '#0056b3',
+            '--accent-secondary': '#004494',
+            '--text-primary': '#222222',
+            '--text-secondary': '#555555',
+            '--glass-bg': 'rgba(255, 255, 255, 0.9)',
+            '--glass-border': 'rgba(0, 0, 0, 0.12)',
         }
     },
     ember: {
-        name: 'Sahara Ember',
+        name: 'Sunrise Ember',
         colors: {
-            '--bg-primary': '#1a0f0a',
-            '--bg-secondary': '#2a1810',
+            '--bg-primary': '#fffcf9',
+            '--bg-secondary': '#fff0e5',
             '--accent-primary': '#d35400',
             '--accent-secondary': '#e67e22',
-            '--text-primary': '#ffffff',
-            '--text-secondary': '#b0b0b0',
-            '--glass-bg': 'rgba(255, 255, 255, 0.04)',
-            '--glass-border': 'rgba(255, 255, 255, 0.08)',
+            '--text-primary': '#1a0f0a',
+            '--text-secondary': '#735f52',
+            '--glass-bg': 'rgba(255, 255, 255, 0.8)',
+            '--glass-border': 'rgba(211, 84, 0, 0.15)',
         }
     }
 };

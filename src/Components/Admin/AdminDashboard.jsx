@@ -1,15 +1,20 @@
 import React, { useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { Container, Row, Col, Nav, Button, Modal, Form } from 'react-bootstrap';
-import { LayoutDashboard, ShoppingBag, Settings, LogOut, Utensils, Menu as MenuIcon } from 'lucide-react';
+import { LayoutDashboard, ShoppingBag, Settings, LogOut, Utensils, Menu as MenuIcon, Megaphone, Gift, Users, BarChart2 } from 'lucide-react';
 import OrderManager from './OrderManager';
 import MenuManager from './MenuManager';
 import StoreSettings from './StoreSettings';
+import AdCreator from './AdCreator';
+import LoyaltyManager from './LoyaltyManager';
+import TeamManager from './TeamManager';
+import AnalyticsDashboard from './AnalyticsDashboard';
 import styled from 'styled-components';
 
 const AdminWrapper = styled.div`
   min-height: 100vh;
-  background-color: var(--bg-dark);
-  color: white;
+  background-color: var(--bg-white);
+  color: var(--text-primary);
   padding-top: 80px;
 `;
 
@@ -35,19 +40,22 @@ const Sidebar = styled.div`
 
     &:hover {
       background: rgba(255, 255, 255, 0.05);
-      color: white;
+      color: var(--text-primary);
     }
 
     &.active {
       background: var(--accent-primary);
-      color: white;
+      color: var(--text-primary);
       box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
     }
   }
 `;
 
 const AdminDashboard = () => {
-    const [activeTab, setActiveTab] = useState('orders');
+    const [searchParams, setSearchParams] = useSearchParams();
+    const activeTab = searchParams.get('tab') || 'analytics';
+    const setActiveTab = (tab) => setSearchParams({ tab });
+    
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
@@ -66,13 +74,13 @@ const AdminDashboard = () => {
         return (
             <AdminWrapper className="d-flex align-items-center justify-content-center">
                 <Modal show={true} centered contentClassName="glass-modal" backdrop="static">
-                    <Modal.Body className="bg-dark text-white p-5 text-center">
+                    <Modal.Body className="bg-white text-dark p-5 text-center">
                         <div className="mb-4">
                             <div className="d-inline-block p-3 rounded-circle bg-warning bg-opacity-10 mb-3">
                                 <Utensils size={48} className="text-warning" />
                             </div>
                             <h2 className="fw-bold">Admin Portal</h2>
-                            <p className="text-secondary">Please enter the administrative password.</p>
+                            <p className="text-muted">Please enter the administrative password.</p>
                         </div>
                         <Form onSubmit={handleLogin}>
                             <Form.Group className="mb-4">
@@ -80,7 +88,7 @@ const AdminDashboard = () => {
                                     type="password"
                                     placeholder="Admin Password"
                                     autoFocus
-                                    className="bg-transparent text-white border-secondary text-center py-2"
+                                    className="bg-transparent text-dark border-light text-center py-2"
                                     value={password}
                                     onChange={(e) => setPassword(e.target.value)}
                                 />
@@ -102,8 +110,14 @@ const AdminDashboard = () => {
                 <Row className="g-0">
                     <Col lg={2} md={3} className="d-none d-md-block">
                         <Sidebar>
-                            <h5 className="text-secondary small fw-bold px-3 mb-4 uppercase tracking-wider">MANAGEMENT</h5>
+                            <h5 className="text-muted small fw-bold px-3 mb-4 uppercase tracking-wider">MANAGEMENT</h5>
                             <Nav className="flex-column">
+                                <div
+                                    className={`nav-link ${activeTab === 'analytics' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('analytics')}
+                                >
+                                    <BarChart2 size={20} /> Overview
+                                </div>
                                 <div
                                     className={`nav-link ${activeTab === 'orders' ? 'active' : ''}`}
                                     onClick={() => setActiveTab('orders')}
@@ -122,6 +136,24 @@ const AdminDashboard = () => {
                                 >
                                     <Settings size={20} /> Settings
                                 </div>
+                                <div
+                                    className={`nav-link ${activeTab === 'ad-creator' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('ad-creator')}
+                                >
+                                    <Megaphone size={20} /> Promotions
+                                </div>
+                                <div
+                                    className={`nav-link ${activeTab === 'loyalty' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('loyalty')}
+                                >
+                                    <Gift size={20} /> Loyalty
+                                </div>
+                                <div
+                                    className={`nav-link ${activeTab === 'team' ? 'active' : ''}`}
+                                    onClick={() => setActiveTab('team')}
+                                >
+                                    <Users size={20} /> Team
+                                </div>
                             </Nav>
 
                             <div className="mt-auto pt-5">
@@ -134,9 +166,13 @@ const AdminDashboard = () => {
 
                     <Col lg={10} md={9} xs={12}>
                         <div className="admin-content min-vh-100 p-2 p-md-4">
+                            {activeTab === 'analytics' && <AnalyticsDashboard />}
                             {activeTab === 'orders' && <OrderManager />}
                             {activeTab === 'menu' && <MenuManager />}
                             {activeTab === 'settings' && <StoreSettings />}
+                            {activeTab === 'ad-creator' && <AdCreator />}
+                            {activeTab === 'loyalty' && <LoyaltyManager />}
+                            {activeTab === 'team' && <TeamManager />}
                         </div>
                     </Col>
                 </Row>

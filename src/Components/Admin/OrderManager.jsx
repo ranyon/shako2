@@ -8,8 +8,9 @@ const StyledCard = styled(Card)`
   background: var(--glass-bg);
   backdrop-filter: blur(20px);
   border: 1px solid var(--glass-border);
-  border-radius: 16px;
-  color: white;
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-soft);
+  color: var(--text-primary);
 `;
 
 const OrderManager = () => {
@@ -80,8 +81,8 @@ const OrderManager = () => {
             </div>
 
             <StyledCard className="p-0 overflow-hidden">
-                <Table responsive hover variant="dark" className="mb-0">
-                    <thead style={{ background: 'rgba(255,255,255,0.05)' }}>
+                <Table responsive hover variant="light" className="mb-0">
+                    <thead style={{ background: 'rgba(0,0,0,0.03)' }}>
                         <tr>
                             <th className="px-4 py-3">Order ID</th>
                             <th className="py-3">Customer</th>
@@ -96,11 +97,11 @@ const OrderManager = () => {
                             <tr><td colSpan="6" className="text-center py-5">No orders found yet.</td></tr>
                         ) : (
                             orders.map(order => (
-                                <tr key={order.id} style={{ borderBottom: '1px solid rgba(255,255,255,0.05)' }}>
+                                <tr key={order.id} style={{ borderBottom: '1px solid rgba(0,0,0,0.03)' }}>
                                     <td className="px-4 py-3 font-monospace text-warning">{order.short_id}</td>
                                     <td className="py-3">
                                         <div className="fw-bold">{order.customer_name}</div>
-                                        <div className="small text-secondary">{order.customer_phone}</div>
+                                        <div className="small text-muted">{order.customer_phone}</div>
                                     </td>
                                     <td className="py-3">
                                         {order.items.map((item, i) => (
@@ -116,7 +117,7 @@ const OrderManager = () => {
                                             <Dropdown.Toggle id="dropdown-status" variant="outline-light" size="sm">
                                                 Update Status
                                             </Dropdown.Toggle>
-                                            <Dropdown.Menu variant="dark">
+                                            <Dropdown.Menu variant="light">
                                                 <Dropdown.Item onClick={() => updateStatus(order.id, 'Order Received')}>Order Received</Dropdown.Item>
                                                 <Dropdown.Item onClick={() => updateStatus(order.id, 'Preparing')}>Preparing</Dropdown.Item>
                                                 <Dropdown.Item onClick={() => updateStatus(order.id, 'Ready')}>Ready</Dropdown.Item>

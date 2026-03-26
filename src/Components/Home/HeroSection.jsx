@@ -23,7 +23,7 @@ const HeroSection = () => {
       price: '₵200.00',
       image: heroPepperNoodles,
       onPrimaryClick: () => window.location.href = '/order',
-      onSecondaryClick: () => console.log('Book Table'),
+      onSecondaryClick: () => window.location.href = '/order',
     },
     {
       badge: 'Chef\'s Special',
@@ -32,7 +32,7 @@ const HeroSection = () => {
       price: '₵250.00',
       image: heroSpicyGoatJollof,
       onPrimaryClick: () => window.location.href = '/order',
-      onSecondaryClick: () => console.log('Book Table'),
+      onSecondaryClick: () => window.location.href = '/order',
     },
     {
       badge: 'Weekend Special',
@@ -41,7 +41,7 @@ const HeroSection = () => {
       price: '₵200.00',
       image: heroLoadedFries,
       onPrimaryClick: () => window.location.href = '/order',
-      onSecondaryClick: () => console.log('Book Table'),
+      onSecondaryClick: () => window.location.href = '/order',
     },
   ];
 

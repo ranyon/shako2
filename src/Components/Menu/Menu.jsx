@@ -49,9 +49,9 @@ const FilterCard = styled.button`
   padding: 15px 25px 15px 15px;
   background: var(--glass-bg, rgba(30, 30, 30, 0.5));
   backdrop-filter: blur(10px);
-  border: 1px solid ${props => props.$isActive ? 'var(--accent-primary)' : 'var(--glass-border, rgba(255, 255, 255, 0.1))'};
+  border: 1px solid ${props => props.$isActive ? 'var(--accent-primary)' : 'var(--glass-border, rgba(0, 0, 0, 0.1))'};
   border-radius: 50px; /* Pill shape */
-  color: white;
+  color: var(--text-primary);
   transition: all 0.3s ease;
   white-space: nowrap;
   flex-shrink: 0;
@@ -71,14 +71,14 @@ const FilterCard = styled.button`
     height: 50px;
     border-radius: 50%;
     overflow: hidden;
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(0, 0, 0, 0.05);
     display: flex;
     justify-content: center;
     align-items: center;
 
     /* If it's the "All" button icon */
     svg {
-      color: ${props => props.$isActive ? 'var(--accent-primary)' : 'var(--text-secondary)'};
+      color: ${props => props.$isActive ? 'var(--accent-primary)' : 'var(--text-muted)'};
     }
   }
 
@@ -93,7 +93,7 @@ const FilterCard = styled.button`
     font-size: 1.1rem;
     font-weight: 700;
     margin: 0;
-    color: ${props => props.$isActive ? 'white' : 'var(--text-secondary)'};
+    color: ${props => props.$isActive ? 'white' : 'var(--text-muted)'};
   }
 `;
 
@@ -105,7 +105,7 @@ const CategorySectionWrapper = styled.div`
 const CategoryHeader = styled.div`
   margin-bottom: 30px;
   padding-bottom: 15px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
@@ -151,7 +151,7 @@ const CategoryHeader = styled.div`
 const MenuItemCard = styled.div`
   background: var(--glass-bg, rgba(30, 30, 30, 0.5));
   backdrop-filter: blur(20px);
-  border: 1px solid var(--glass-border, rgba(255, 255, 255, 0.05));
+  border: 1px solid var(--glass-border, rgba(0, 0, 0, 0.05));
   border-radius: 20px;
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -169,7 +169,7 @@ const MenuItemCard = styled.div`
     width: 100%;
     height: 220px;
     position: relative;
-    background: rgba(0, 0, 0, 0.3);
+    background: var(--bg-secondary);
     overflow: hidden;
     
     img {
@@ -199,7 +199,7 @@ const MenuItemCard = styled.div`
     }
 
     p {
-      color: var(--text-secondary);
+      color: var(--text-muted);
       font-size: 0.95rem;
       flex-grow: 1;
       margin-bottom: 25px;
@@ -211,7 +211,7 @@ const MenuItemCard = styled.div`
       justify-content: space-between;
       align-items: center;
       padding-top: 15px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      border-top: 1px solid rgba(0, 0, 0, 0.05);
 
       .price {
         color: var(--accent-primary);
@@ -232,7 +232,7 @@ const MenuItemCard = styled.div`
 
         &:hover {
           background: var(--accent-primary);
-          color: white;
+          color: var(--text-primary);
           box-shadow: 0 5px 15px rgba(255, 107, 0, 0.4);
           border-color: var(--accent-primary);
         }
@@ -312,7 +312,7 @@ const Menu = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            style={{ color: 'var(--text-secondary)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}
+            style={{ color: 'var(--text-muted)', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}
           >
             Experience our exclusive house specialty dishes.
           </motion.p>
