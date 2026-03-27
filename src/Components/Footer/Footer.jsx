@@ -2,7 +2,6 @@ import React from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { Instagram, Twitter, Facebook, MapPin, Phone, Mail } from 'lucide-react';
-import Logo from '../../assets/logo.png';
 
 const Footer = () => {
   return (
@@ -12,8 +11,8 @@ const Footer = () => {
           {/* Brand Info */}
           <Col lg={4} md={6}>
             <div className="mb-4">
-              <Link to="/">
-                <img src={Logo} alt="Shako Mako Logo" height="60" style={{ width: 'auto' }} />
+              <Link to="/" style={{ textDecoration: 'none' }}>
+                <h3 style={{ fontWeight: 800, color: 'var(--text-primary)', margin: 0, letterSpacing: '-1px' }}>Shako Mako</h3>
               </Link>
             </div>
             <p className="text-dark mb-4" style={{ fontSize: '0.95rem', lineHeight: '1.6', maxWidth: '300px' }}>
