@@ -340,7 +340,7 @@ const Menu = () => {
                     </Link>
                   </CategoryHeader>
 
-                  <Row className="g-4">
+                  <Row className="g-4 justify-content-center">
                     {itemsInCategory.map((item, itemIndex) => (
                       <Col key={item.id} xl={3} lg={4} md={6} xs={12}>
                         <motion.div
