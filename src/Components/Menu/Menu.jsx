@@ -175,7 +175,7 @@ const MenuItemCard = styled.div`
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
       transition: transform 0.7s ease;
     }
   }
@@ -354,6 +354,7 @@ const Menu = () => {
                               <img
                                 src={item.image}
                                 alt={item.name}
+                                loading="lazy"
                                 onError={(e) => { e.target.style.display = 'none'; }}
                               />
                             </div>

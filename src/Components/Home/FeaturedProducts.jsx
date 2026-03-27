@@ -28,7 +28,8 @@ const ProductCard = styled(Card)`
 
   .card-img-top {
     height: 250px;
-    object-fit: cover;
+    object-fit: contain;
+    padding: 1rem;
   }
 `;
 
@@ -60,7 +61,7 @@ const FeaturedProducts = () => {
                                 style={{ height: '100%' }}
                             >
                                 <ProductCard>
-                                    <Card.Img variant="top" src={item.image} alt={item.name} />
+                                    <Card.Img variant="top" src={item.image} alt={item.name} loading="lazy" />
                                     <Card.Body className="d-flex flex-column p-4">
                                         <Card.Title style={{ fontSize: '1.5rem', fontWeight: 600, marginBottom: '0.5rem' }}>
                                             {item.name}

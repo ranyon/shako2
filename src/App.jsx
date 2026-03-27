@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import SplashScreen from './Components/SplashScreen/SplashScreen';
 import AOS from 'aos';
@@ -25,7 +25,7 @@ import platter3 from './assets/platter3.png';
 function ScrollToTop() {
   const { pathname, hash } = useLocation();
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (hash === '') {
       window.scrollTo(0, 0);
     } else {
