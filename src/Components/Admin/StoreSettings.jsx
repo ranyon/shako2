@@ -75,7 +75,7 @@ const StoreSettings = () => {
 
             {message && <Alert variant={message.type} className="mb-4">{message.text}</Alert>}
 
-            <StyledCard className="p-4">
+            <StyledCard className="p-4 bg-white border-secondary text-dark shadow-sm">
                 <h5 className="mb-4 d-flex align-items-center gap-2">
                     <Palette size={20} className="text-warning" /> Visual Identity (Theme)
                 </h5>
@@ -83,11 +83,11 @@ const StoreSettings = () => {
                     {Object.entries(themes).map(([key, theme]) => (
                         <Col key={key} sm={4}>
                             <div
-                                className={`p-3 rounded-3 border-2 cursor-pointer transition-all ${settings.current_theme === key ? 'border-warning bg-warning bg-opacity-10' : 'border-light'}`}
+                                className={`p-3 rounded-3 border-2 cursor-pointer transition-all ${settings.current_theme === key ? 'border-warning bg-warning bg-opacity-10' : 'border-secondary'}`}
                                 style={{
                                     border: '2px solid',
                                     cursor: 'pointer',
-                                    background: settings.current_theme === key ? 'rgba(212, 175, 55, 0.1)' : 'rgba(0,0,0,0.02)'
+                                    background: settings.current_theme === key ? 'rgba(212, 175, 55, 0.1)' : '#f8f9fa'
                                 }}
                                 onClick={() => updateSetting('current_theme', key)}
                             >
@@ -96,7 +96,7 @@ const StoreSettings = () => {
                                     {settings.current_theme === key && <CheckCircle size={16} className="text-warning" />}
                                 </div>
                                 <div className="d-flex gap-1 h-10px">
-                                    <div style={{ flex: 1, height: '10px', background: theme.colors['--bg-primary'], borderRadius: '2px' }} />
+                                    <div style={{ flex: 1, height: '10px', background: theme.colors['--bg-primary'], borderRadius: '2px', border: '1px solid #ddd' }} />
                                     <div style={{ flex: 1, height: '10px', background: theme.colors['--accent-primary'], borderRadius: '2px' }} />
                                 </div>
                             </div>
@@ -105,18 +105,18 @@ const StoreSettings = () => {
                 </Row>
             </StyledCard>
 
-            <StyledCard className="p-4">
+            <StyledCard className="p-4 bg-white border-secondary text-dark shadow-sm">
                 <h5 className="mb-4 d-flex align-items-center gap-2">
                     <Smartphone size={20} className="text-warning" /> Payment Information
                 </h5>
                 <Form.Group className="mb-3">
-                    <Form.Label>Business MoMo Number</Form.Label>
+                    <Form.Label className="text-dark">Business MoMo Number</Form.Label>
                     <InputGroup>
                         <Form.Control
                             type="text"
                             value={settings.business_momo || ''}
                             onChange={e => setSettings({ ...settings, business_momo: e.target.value })}
-                            className="bg-transparent text-dark border-light"
+                            className="bg-transparent text-dark border-secondary"
                         />
                         <Button
                             variant="warning"
@@ -132,24 +132,24 @@ const StoreSettings = () => {
 
             <Row>
                 <Col md={6}>
-                    <StyledCard className="p-4 h-100">
+                    <StyledCard className="p-4 h-100 bg-white border-secondary text-dark shadow-sm">
                         <h5 className="mb-4 d-flex align-items-center gap-2">
                             <Clock size={20} className="text-warning" /> Operating Hours
                         </h5>
                         <Form.Group className="mb-3">
-                            <Form.Label>Opening Time</Form.Label>
+                            <Form.Label className="text-dark">Opening Time</Form.Label>
                             <Form.Control
                                 type="time"
                                 value={settings.opening_time || ''}
                                 onChange={e => setSettings({ ...settings, opening_time: e.target.value })}
-                                className="bg-transparent text-dark border-light mb-3"
+                                className="bg-transparent text-dark border-secondary mb-3"
                             />
-                            <Form.Label>Closing Time</Form.Label>
+                            <Form.Label className="text-dark">Closing Time</Form.Label>
                             <Form.Control
                                 type="time"
                                 value={settings.closing_time || ''}
                                 onChange={e => setSettings({ ...settings, closing_time: e.target.value })}
-                                className="bg-transparent text-dark border-light"
+                                className="bg-transparent text-dark border-secondary"
                             />
                             <Button
                                 variant="outline-warning"
@@ -166,7 +166,7 @@ const StoreSettings = () => {
                     </StyledCard>
                 </Col>
                 <Col md={6}>
-                    <StyledCard className="p-4 h-100">
+                    <StyledCard className="p-4 h-100 bg-white border-secondary text-dark shadow-sm">
                         <h5 className="mb-4 d-flex align-items-center gap-2">
                             <Power size={20} className="text-warning" /> Store Status
                         </h5>

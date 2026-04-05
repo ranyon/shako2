@@ -14,8 +14,8 @@ const DashboardContainer = styled.div`
 `;
 
 const StatCard = styled(Card)`
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.05);
   border-radius: var(--border-radius-lg);
   box-shadow: var(--shadow-soft);
   overflow: hidden;
@@ -23,7 +23,7 @@ const StatCard = styled(Card)`
 
   &:hover {
     transform: translateY(-5px);
-    border-color: rgba(255, 107, 0, 0.3);
+    border-color: var(--accent-primary);
   }
 
   .icon-wrapper {
@@ -61,7 +61,7 @@ const AnalyticsDashboard = () => {
         <DashboardContainer>
             <div className="d-flex justify-content-between align-items-center mb-5">
                 <div>
-                    <h2 className="mb-1"><TrendingUp className="me-2 text-warning" /> Business Overview</h2>
+                    <h2 className="mb-1 text-dark"><TrendingUp className="me-2 text-warning" /> Business Overview</h2>
                     <p className="text-muted mb-0">Track your restaurant's performance across all metrics.</p>
                 </div>
             </div>
@@ -72,13 +72,13 @@ const AnalyticsDashboard = () => {
                     const isPositive = stat.trend.startsWith('+');
                     return (
                         <Col lg={3} md={6} key={index}>
-                            <StatCard className="text-dark h-100">
+                            <StatCard className="h-100">
                                 <Card.Body className="p-4">
                                     <div className="icon-wrapper">
                                         <Icon size={24} />
                                     </div>
                                     <h6 className="text-muted mb-2">{stat.title}</h6>
-                                    <h3 className="fw-bold mb-3">{stat.value}</h3>
+                                    <h3 className="fw-bold mb-3 text-dark">{stat.value}</h3>
                                     <div className={`small fw-bold ${isPositive ? 'text-success' : 'text-danger'}`}>
                                         {stat.trend} <span className="text-muted fw-normal">vs last month</span>
                                     </div>
@@ -91,14 +91,14 @@ const AnalyticsDashboard = () => {
 
             <Row className="g-4">
                 <Col lg={8}>
-                    <Card className="bg-transparent border-light text-dark h-100">
-                        <Card.Header className="border-light bg-white fw-bold py-3">Top Performing Items</Card.Header>
+                    <Card className="bg-white border-light h-100 shadow-sm">
+                        <Card.Header className="border-light bg-light text-dark fw-bold py-3">Top Performing Items</Card.Header>
                         <Card.Body className="p-4">
                             {topItems.map((item, index) => (
                                 <div key={index} className="mb-4 last-mb-0">
                                     <div className="d-flex justify-content-between align-items-end mb-2">
                                         <div>
-                                            <div className="fw-bold mb-1">{item.name}</div>
+                                            <div className="fw-bold mb-1 text-dark">{item.name}</div>
                                             <div className="text-muted small">{item.sales} orders</div>
                                         </div>
                                         <div className="fw-bold text-warning">₵{item.revenue.toLocaleString()}</div>
@@ -106,7 +106,7 @@ const AnalyticsDashboard = () => {
                                     <ProgressBar 
                                         now={(item.sales / maxSales) * 100} 
                                         variant="warning" 
-                                        style={{ height: '6px', backgroundColor: 'var(--accent-primary)' }} 
+                                        style={{ height: '6px', backgroundColor: '#f0f0f0' }} 
                                     />
                                 </div>
                             ))}
@@ -114,9 +114,9 @@ const AnalyticsDashboard = () => {
                     </Card>
                 </Col>
                 <Col lg={4}>
-                    <Card className="bg-transparent border-light text-dark h-100">
-                        <Card.Header className="border-light bg-white fw-bold py-3">Recent Activity</Card.Header>
-                        <Card.Body className="p-4">
+                    <Card className="bg-white border-light h-100 shadow-sm">
+                        <Card.Header className="border-light bg-light text-dark fw-bold py-3">Recent Activity</Card.Header>
+                        <Card.Body className="p-4 text-dark">
                             <div className="d-flex gap-3 mb-4">
                                 <div className="mt-1"><div className="rounded-circle bg-success p-2"></div></div>
                                 <div>

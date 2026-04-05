@@ -248,13 +248,13 @@ const AdCreator = () => {
 
             <Row>
                 <Col lg={5} className="mb-4">
-                    <Card className="bg-transparent border-light text-dark">
-                        <Card.Header className="border-light fw-bold">1. Select Product</Card.Header>
+                    <Card className="bg-white border-secondary text-dark shadow-sm">
+                        <Card.Header className="border-secondary bg-light fw-bold text-dark">1. Select Product</Card.Header>
                         <Card.Body>
                             <Form.Group>
-                                <Form.Label>Choose a dish to feature</Form.Label>
+                                <Form.Label className="text-dark">Choose a dish to feature</Form.Label>
                                 <Form.Select 
-                                    className="bg-white text-dark border-light mb-4"
+                                    className="bg-white text-dark border-secondary mb-4"
                                     onChange={handleItemChange}
                                     value={selectedItem?.id || ''}
                                 >
@@ -267,7 +267,7 @@ const AdCreator = () => {
                             </Form.Group>
                             
                             {selectedItem && (
-                                <div className="p-3 bg-white rounded border border-light mt-3">
+                                <div className="p-3 bg-light rounded border border-secondary mt-3">
                                     <h6 className="text-muted mb-2">Selected Details:</h6>
                                     <div className="d-flex gap-3 align-items-center">
                                         <img 
@@ -277,14 +277,14 @@ const AdCreator = () => {
                                             onError={(e) => { e.target.src = '/src/assets/logo.svg' }}
                                         />
                                         <div>
-                                            <div className="fw-bold">{selectedItem.name}</div>
+                                            <div className="fw-bold text-dark">{selectedItem.name}</div>
                                             <div className="text-warning">₵{parseFloat(selectedItem.price).toFixed(2)}</div>
                                         </div>
                                     </div>
                                 </div>
                             )}
                             
-                            <div className="alert alert-info bg-white border-info text-info mt-4 small">
+                            <div className="alert alert-info bg-white border-info text-dark mt-4 small">
                                 <i className="lucide-info"></i> This tool generates a 1080x1080 PNG image perfectly sized for Instagram, Facebook, or WhatsApp Status.
                             </div>
                         </Card.Body>
@@ -292,12 +292,12 @@ const AdCreator = () => {
                 </Col>
 
                 <Col lg={7}>
-                    <Card className="bg-transparent border-light text-dark">
-                        <Card.Header className="border-light fw-bold d-flex justify-content-between align-items-center">
+                    <Card className="bg-white border-secondary text-dark shadow-sm">
+                        <Card.Header className="border-secondary bg-light fw-bold d-flex justify-content-between align-items-center text-dark">
                             <span>2. Preview</span>
                             <span className="badge bg-secondary">Instagram Post (1:1)</span>
                         </Card.Header>
-                        <Card.Body className="d-flex justify-content-center bg-white" id="ad-preview-container">
+                        <Card.Body className="d-flex justify-content-center bg-light" id="ad-preview-container">
                             {/* AD CANVAS */}
                             {selectedItem ? (
                                 <AdPreviewCard ref={adRef}>

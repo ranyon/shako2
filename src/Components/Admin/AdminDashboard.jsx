@@ -13,22 +13,22 @@ import styled from 'styled-components';
 
 const AdminWrapper = styled.div`
   min-height: 100vh;
-  background-color: var(--bg-white);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   padding-top: 80px;
 `;
 
 const Sidebar = styled.div`
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(0, 0, 0, 0.03);
   backdrop-filter: blur(10px);
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
+  border-right: 1px solid rgba(0, 0, 0, 0.05);
   height: calc(100vh - 80px);
   position: sticky;
   top: 80px;
   padding: 20px;
 
   .nav-link {
-    color: rgba(255, 255, 255, 0.7);
+    color: var(--text-secondary);
     padding: 12px 20px;
     border-radius: 12px;
     margin-bottom: 8px;
@@ -39,13 +39,13 @@ const Sidebar = styled.div`
     cursor: pointer;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.05);
       color: var(--text-primary);
     }
 
     &.active {
       background: var(--accent-primary);
-      color: var(--text-primary);
+      color: white;
       box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
     }
   }

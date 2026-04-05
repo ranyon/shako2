@@ -76,13 +76,13 @@ const OrderManager = () => {
     return (
         <div className="order-manager p-4">
             <div className="d-flex justify-content-between align-items-center mb-4">
-                <h2><ShoppingBag className="me-2" /> Live Orders</h2>
-                <Button variant="outline-light" onClick={fetchOrders} size="sm">Refresh List</Button>
+                <h2 className="text-dark"><ShoppingBag className="me-2" /> Live Orders</h2>
+                <Button variant="outline-dark" onClick={fetchOrders} size="sm">Refresh List</Button>
             </div>
 
             <StyledCard className="p-0 overflow-hidden">
                 <Table responsive hover variant="light" className="mb-0">
-                    <thead style={{ background: 'rgba(0,0,0,0.03)' }}>
+                    <thead style={{ background: 'rgba(0,0,0,0.05)', color: 'var(--text-primary)' }}>
                         <tr>
                             <th className="px-4 py-3">Order ID</th>
                             <th className="py-3">Customer</th>
@@ -94,27 +94,27 @@ const OrderManager = () => {
                     </thead>
                     <tbody>
                         {orders.length === 0 ? (
-                            <tr><td colSpan="6" className="text-center py-5">No orders found yet.</td></tr>
+                            <tr><td colSpan="6" className="text-center py-5 text-dark">No orders found yet.</td></tr>
                         ) : (
                             orders.map(order => (
                                 <tr key={order.id} style={{ borderBottom: '1px solid rgba(0,0,0,0.03)' }}>
-                                    <td className="px-4 py-3 font-monospace text-warning">{order.short_id}</td>
-                                    <td className="py-3">
+                                    <td className="px-4 py-3 font-monospace text-warning fw-bold">{order.short_id}</td>
+                                    <td className="py-3 text-dark">
                                         <div className="fw-bold">{order.customer_name}</div>
                                         <div className="small text-muted">{order.customer_phone}</div>
                                     </td>
-                                    <td className="py-3">
+                                    <td className="py-3 text-dark">
                                         {order.items.map((item, i) => (
                                             <div key={i} className="small">
                                                 {item.quantity}x {item.name}
                                             </div>
                                         ))}
                                     </td>
-                                    <td className="py-3 fw-bold">₵{parseFloat(order.total_amount).toFixed(2)}</td>
+                                    <td className="py-3 fw-bold text-dark">₵{parseFloat(order.total_amount).toFixed(2)}</td>
                                     <td className="py-3">{getStatusBadge(order.status)}</td>
                                     <td className="py-3 text-end px-4">
                                         <Dropdown drop="start">
-                                            <Dropdown.Toggle id="dropdown-status" variant="outline-light" size="sm">
+                                            <Dropdown.Toggle id="dropdown-status" variant="outline-dark" size="sm">
                                                 Update Status
                                             </Dropdown.Toggle>
                                             <Dropdown.Menu variant="light">

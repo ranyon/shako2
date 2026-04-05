@@ -64,11 +64,9 @@ const TeamManager = () => {
                 <Button variant="info" className="text-dark fw-bold" onClick={() => setShowModal(true)}>
                     <UserPlus size={18} className="me-2" /> Add Staff
                 </Button>
-            </div>
-
-            <Row className="mb-4">
+            </div>            <Row className="mb-4 text-dark">
                 <Col md={4}>
-                    <Card className="bg-white border-light text-center py-3">
+                    <Card className="bg-white border-secondary text-center py-3">
                         <Card.Body>
                             <h6 className="text-muted text-uppercase tracking-wider">Total Staff</h6>
                             <h3 className="mb-0 fw-bold">{team.length}</h3>
@@ -76,7 +74,7 @@ const TeamManager = () => {
                     </Card>
                 </Col>
                 <Col md={4}>
-                    <Card className="bg-white border-light text-center py-3">
+                    <Card className="bg-white border-secondary text-center py-3">
                         <Card.Body>
                             <h6 className="text-muted text-uppercase tracking-wider">Active Staff</h6>
                             <h3 className="mb-0 fw-bold text-success">{team.filter(t => t.status === 'Active').length}</h3>
@@ -84,7 +82,7 @@ const TeamManager = () => {
                     </Card>
                 </Col>
                 <Col md={4}>
-                    <Card className="bg-white border-light text-center py-3">
+                    <Card className="bg-white border-secondary text-center py-3">
                         <Card.Body>
                             <h6 className="text-muted text-uppercase tracking-wider">Pending Payroll</h6>
                             <h3 className="mb-0 fw-bold text-warning">
@@ -95,9 +93,9 @@ const TeamManager = () => {
                 </Col>
             </Row>
 
-            <Card className="bg-transparent border-light overflow-hidden">
+            <Card className="bg-white border-secondary overflow-hidden text-dark">
                 <Table responsive hover variant="light" className="mb-0">
-                    <thead>
+                    <thead className="bg-light">
                         <tr>
                             <th className="px-4 py-3">Name</th>
                             <th className="py-3">Role</th>
@@ -156,7 +154,7 @@ const TeamManager = () => {
             </Card>
 
             <Modal show={showModal} onHide={() => setShowModal(false)} centered contentClassName="glass-modal">
-                <Modal.Header closeButton closeVariant="white" className="border-light bg-white text-dark">
+                <Modal.Header closeButton closeVariant="dark" className="border-bottom bg-white text-dark">
                     <Modal.Title>Add Team Member</Modal.Title>
                 </Modal.Header>
                 <Modal.Body className="bg-white text-dark p-4">
@@ -168,7 +166,7 @@ const TeamManager = () => {
                                 value={formData.name}
                                 onChange={e => setFormData({ ...formData, name: e.target.value })}
                                 placeholder="e.g., Jane Doe"
-                                className="bg-transparent text-dark border-light"
+                                className="bg-transparent text-dark border-secondary"
                             />
                         </Form.Group>
                         <Row>
@@ -178,7 +176,7 @@ const TeamManager = () => {
                                     <Form.Select
                                         value={formData.role}
                                         onChange={e => setFormData({ ...formData, role: e.target.value })}
-                                        className="bg-white text-dark border-light"
+                                        className="bg-white text-dark border-secondary"
                                     >
                                         <option value="Manager">Manager</option>
                                         <option value="Head Chef">Head Chef</option>
@@ -196,15 +194,15 @@ const TeamManager = () => {
                                         value={formData.rate}
                                         onChange={e => setFormData({ ...formData, rate: e.target.value })}
                                         placeholder="e.g., 15"
-                                        className="bg-transparent text-dark border-light"
+                                        className="bg-transparent text-dark border-secondary"
                                     />
                                 </Form.Group>
                             </Col>
                         </Row>
                     </Form>
                 </Modal.Body>
-                <Modal.Footer className="border-light bg-white">
-                    <Button variant="outline-light" onClick={() => setShowModal(false)}>Cancel</Button>
+                <Modal.Footer className="border-top bg-white">
+                    <Button variant="outline-dark" onClick={() => setShowModal(false)}>Cancel</Button>
                     <Button variant="info" className="text-dark fw-bold" onClick={handleAddMember} disabled={!formData.name || !formData.rate}>
                         Onboard Staff
                     </Button>
